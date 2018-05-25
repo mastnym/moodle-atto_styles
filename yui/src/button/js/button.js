@@ -127,8 +127,11 @@ Y.namespace('M.atto_styles').Button = Y.Base.create('button', Y.M.editor_atto.Ed
             document.execCommand('formatBlock', false, '<div>');
             element = window.getSelection().focusNode;
             for (p = element; p; p = p.parentNode) {
-                if (p.nodeType !== 1) {
+                if (p.nodeType !== 1 || !p.getAttribute('class')) {
                     continue;
+                }
+                if (p.getAttribute('class').search('editor_atto_content') != -1) {
+                    break;
                 }
                 pstyle = window.getComputedStyle(p, null);
                 if (pstyle) {
